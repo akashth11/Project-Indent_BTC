@@ -18468,6 +18468,18 @@
         "Type": "3 PL"
     },
     {
+        "Supplier Code": "WH007GT",
+        "Supplier Name": "Kundli Warehouse GT",
+        "Supplier Type": "Internal",
+        "Status": "Active",
+        "Managing Branch": "WH-007",
+        "Attribute": "Buyer Branches.12",
+        "Value": "TC-001",
+        "Branch Code": "TC-001",
+        "ConcatSUPPLIER": "TC-001WH-007",
+        "Type": "3 PL"
+    },
+    {
         "Supplier Code": "WH007K",
         "Supplier Name": "Kundli Warehouse Kolkata",
         "Supplier Type": "Internal",
@@ -19173,18 +19185,6 @@
         "Value": "CA-085",
         "Branch Code": "CA-085",
         "ConcatSUPPLIER": "CA-085WH-007",
-        "Type": "3 PL"
-    },
-    {
-        "Supplier Code": "WH007SAB",
-        "Supplier Name": "Kundli Warehouse SAB",
-        "Supplier Type": "Internal",
-        "Status": "Active",
-        "Managing Branch": "WH-007",
-        "Attribute": "Buyer Branches.48",
-        "Value": "TC-001",
-        "Branch Code": "TC-001",
-        "ConcatSUPPLIER": "TC-001WH-007",
         "Type": "3 PL"
     },
     {
