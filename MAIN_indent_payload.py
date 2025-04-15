@@ -62,9 +62,16 @@ for branch_code, suppliers in buyer_supplier_orders.items():
         # Group by delivery date
         delivery_date_groups = defaultdict(list)
         for item in items:
-            delivery_date_groups[item["DELIVERY DATE"]].append(item)
+            raw_date = item["DELIVERY DATE"]
+    try:
+        parsed_date = datetime.strptime(raw_date, "%d-%m-%Y")  # Adjust format as needed
+    except ValueError:
+        parsed_date = datetime.strptime(raw_date, "%Y-%m-%d")  # Fallback
+    normalized_date = parsed_date.strftime("%Y-%m-%d")
+    delivery_date_groups[normalized_date].append(item)
 
-        for delivery_date, date_items in delivery_date_groups.items():
+
+for delivery_date, date_items in delivery_date_groups.items():
             indent_payload = {
                 "branchCode": branch_code,
                 "branchName": date_items[0]["BRANCH NAME"],
