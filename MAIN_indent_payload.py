@@ -40,7 +40,7 @@ supplier_code_mapping = {
     if item["Status"] == "Active"
 }
 
-# Group by buyer, supplier, and delivery date
+# Group by buyer, supplier
 buyer_supplier_orders = defaultdict(lambda: defaultdict(list))
 
 for buyer_data in order_data:
@@ -59,19 +59,20 @@ csv_data = []
 
 for branch_code, suppliers in buyer_supplier_orders.items():
     for supplier_code, items in suppliers.items():
-        # Group by delivery date
+        
+        # ✅ Correctly group by delivery date INSIDE this loop
         delivery_date_groups = defaultdict(list)
         for item in items:
             raw_date = item["DELIVERY DATE"]
-    try:
-        parsed_date = datetime.strptime(raw_date, "%d-%m-%Y")  # Adjust format as needed
-    except ValueError:
-        parsed_date = datetime.strptime(raw_date, "%Y-%m-%d")  # Fallback
-    normalized_date = parsed_date.strftime("%Y-%m-%d")
-    delivery_date_groups[normalized_date].append(item)
+            try:
+                parsed_date = datetime.strptime(raw_date, "%d-%m-%Y")  # Adjust format as needed
+            except ValueError:
+                parsed_date = datetime.strptime(raw_date, "%Y-%m-%d")  # Fallback
+            normalized_date = parsed_date.strftime("%Y-%m-%d")
+            delivery_date_groups[normalized_date].append(item)
 
-
-for delivery_date, date_items in delivery_date_groups.items():
+        # ✅ Now iterate over each delivery date's group
+        for delivery_date, date_items in delivery_date_groups.items():
             indent_payload = {
                 "branchCode": branch_code,
                 "branchName": date_items[0]["BRANCH NAME"],
